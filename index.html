@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enigma Chocolates | Despierta tus sentidos</title>
+    <!-- Tailwind CSS para los estilos base y maquetación -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts para una tipografía elegante -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- FontAwesome para iconos (como WhatsApp y redes sociales) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Definición de paleta de colores personalizada y tipografías */
+        :root {
+            --color-bg-dark: #0a0a0a;
+            --color-gold: #d4af37;
+            --color-gold-dark: #aa8c2c;
+            --color-text-light: #f5f5f5;
+        }
+
+        body {
+            background-color: var(--color-bg-dark);
+            color: var(--color-text-light);
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden; /* Evitar scroll horizontal indeseado */
+        }
+
+        h1, h2, h3, .font-cinzel {
+            font-family: 'Cinzel', serif;
+        }
+
+        /* Clases utilitarias para animaciones de entrada controladas por JS */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 0.2s; }
+        .reveal-delay-2 { transition-delay: 0.4s; }
+        .reveal-delay-3 { transition-delay: 0.6s; }
+
+        /* Efecto parallax suave para el hero (se maneja con background-attachment en Tailwind, pero se puede potenciar) */
+        .hero-bg {
+            background-image: linear-gradient(to bottom, rgba(10, 10, 10, 0.3), rgba(10, 10, 10, 1)), url('https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        /* Efectos brillantes y gradientes para botones y detalles */
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(45deg, var(--color-gold), #fff8d6, var(--color-gold));
+        }
+
+        .border-gradient {
+            border: 1px solid;
+            border-image-slice: 1;
+            border-width: 1px;
+            border-image-source: linear-gradient(to right, transparent, var(--color-gold), transparent);
+        }
+
+        /* Animación de pulso para el botón flotante de WhatsApp */
+        @keyframes pulse-whatsapp {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        .btn-whatsapp-floating {
+            animation: pulse-whatsapp 2s infinite;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            transition: transform 0.3s ease;
+        }
+        
+        .btn-whatsapp-floating:hover {
+            transform: scale(1.15) !important;
+            animation: none;
+        }
+
+        /* Patrón de fondo sutil para secciones */
+        .pattern-bg {
+            background-image: radial-gradient(rgba(212, 175, 55, 0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-yellow-600 selection:text-white">
+
+    <header class="fixed w-full z-50 transition-all duration-300 backdrop-blur-sm" id="navbar">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-cinzel text-white tracking-widest font-bold">
+                ENIGMA <span class="text-[var(--color-gold)]">.</span>
+            </a>
+            
+            <!-- Navegación Desktop -->
+            <nav class="hidden md:flex space-x-8 text-sm uppercase tracking-widest">
+                <a href="#experiencia" class="hover:text-[var(--color-gold)] transition-colors duration-300">La Experiencia</a>
+                <a href="#coleccion" class="hover:text-[var(--color-gold)] transition-colors duration-300">Colección</a>
+                <a href="#origen" class="hover:text-[var(--color-gold)] transition-colors duration-300">El Origen</a>
+            </nav>
+
+            <!-- Menú Móvil (Botón) -->
+            <button class="md:hidden text-white focus:outline-none" aria-label="Menú">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Sección Hero -->
+        <section class="hero-bg min-h-screen flex items-center justify-center relative pt-20">
+            <!-- Efecto de partículas/estrellas sutil generado por CSS -->
+            <div class="absolute inset-0 overflow-hidden pointer-events-none">
+                <div class="absolute w-1 h-1 bg-white rounded-full opacity-20 top-1/4 left-1/4 animate-pulse"></div>
+                <div class="absolute w-2 h-2 bg-yellow-200 rounded-full opacity-30 top-1/3 right-1/4 animate-bounce" style="animation-duration: 3s;"></div>
+                <div class="absolute w-1 h-1 bg-white rounded-full opacity-40 bottom-1/4 left-1/3 animate-ping" style="animation-duration: 4s;"></div>
+            </div>
+
+            <div class="text-center px-4 max-w-4xl relative z-10">
+                <h2 class="text-sm md:text-base tracking-[0.3em] text-[var(--color-gold)] uppercase mb-4 reveal">Bienvenidos a lo Desconocido</h2>
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-cinzel font-bold mb-6 text-white leading-tight reveal reveal-delay-1">
+                    <span class="text-gradient">ENIGMA</span>
+                </h1>
+                <p class="text-lg md:text-xl font-light mb-10 max-w-2xl mx-auto italic text-gray-300 reveal reveal-delay-2">
+                    "✨ Hay experiencias que no se explican, se viven."
+                </p>
+                <div class="reveal reveal-delay-3">
+                    <a href="#experiencia" class="inline-block border border-[var(--color-gold)] text-[var(--color-gold)] px-8 py-3 rounded-full uppercase tracking-widest text-sm hover:bg-[var(--color-gold)] hover:text-black transition-all duration-300">
+                        Descubre el Secreto
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Indicador de scroll -->
+            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+                <a href="#experiencia" class="text-gray-400 hover:text-white">
+                    <i class="fas fa-chevron-down text-2xl"></i>
+                </a>
+            </div>
+        </section>
+
+        <section id="experiencia" class="py-24 pattern-bg relative">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto text-center">
+                    <div class="w-16 h-px bg-[var(--color-gold)] mx-auto mb-8 reveal"></div>
+                    <h2 class="text-3xl md:text-5xl font-cinzel mb-12 text-white reveal reveal-delay-1">Más allá del Sabor</h2>
+                    
+                    <div class="space-y-8 text-xl md:text-2xl font-light leading-relaxed text-gray-300">
+                        <p class="reveal">
+                            Despierta tus sentidos, mira más allá y explora nuevas dimensiones. <span class="text-[var(--color-gold)]">🌌</span>
+                        </p>
+                        <p class="reveal">
+                            Una experiencia diferente, intensa y fuera de lo común te espera. <span class="text-[var(--color-gold)]">🌀</span>
+                        </p>
+                        <p class="reveal font-cinzel text-white text-2xl md:text-3xl mt-12">
+                            Atrévete a descubrir lo que siempre estuvo dentro de ti.
+                        </p>
+                    </div>
+                    <div class="w-16 h-px bg-[var(--color-gold)] mx-auto mt-16 reveal"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="coleccion" class="py-24 bg-black relative">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-cinzel text-white mb-4 reveal">La Colección</h2>
+                    <p class="text-gray-400 tracking-widest uppercase text-sm reveal">Nuestros oscuros secretos revelados</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                    <!-- Producto 1 -->
+                    <div class="group reveal">
+                        <div class="relative overflow-hidden rounded-lg aspect-square mb-6 bg-gray-900 border border-gray-800">
+                            <!-- Usando una imagen representativa de chocolate oscuro -->
+                            <img src="https://images.unsplash.com/photo-1549007994-cb92caebd54b?q=80&w=800&auto=format&fit=crop" alt="Chocolate Oscuro Intenso" class="object-cover w-full h-full transform group-hover:scale-110 transition-transform duration-700 opacity-80 group-hover:opacity-100">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
+                            <div class="absolute bottom-0 left-0 p-6 w-full text-center">
+                                <h3 class="text-2xl font-cinzel text-white mb-2">Abismo</h3>
+                                <p class="text-[var(--color-gold)] text-sm tracking-wider">Cacao 85% Origen Único</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Producto 2 -->
+                    <div class="group reveal reveal-delay-1">
+                        <div class="relative overflow-hidden rounded-lg aspect-square mb-6 bg-gray-900 border border-gray-800">
+                            <img src="https://images.unsplash.com/photo-1511381939415-e440c9f11a53?q=80&w=800&auto=format&fit=crop" alt="Trufas Enigma" class="object-cover w-full h-full transform group-hover:scale-110 transition-transform duration-700 opacity-80 group-hover:opacity-100">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
+                            <div class="absolute bottom-0 left-0 p-6 w-full text-center">
+                                <h3 class="text-2xl font-cinzel text-white mb-2">Nebulosa</h3>
+                                <p class="text-[var(--color-gold)] text-sm tracking-wider">Trufas de ganache especiado</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Producto 3 -->
+                    <div class="group reveal reveal-delay-2">
+                        <div class="relative overflow-hidden rounded-lg aspect-square mb-6 bg-gray-900 border border-gray-800">
+                            <img src="https://images.unsplash.com/photo-1623659248890-988f57294156?q=80&w=800&auto=format&fit=crop" alt="Chocolate con sal" class="object-cover w-full h-full transform group-hover:scale-110 transition-transform duration-700 opacity-80 group-hover:opacity-100">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
+                            <div class="absolute bottom-0 left-0 p-6 w-full text-center">
+                                <h3 class="text-2xl font-cinzel text-white mb-2">Dualidad</h3>
+                                <p class="text-[var(--color-gold)] text-sm tracking-wider">Sal de mar y caramelo oscuro</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="origen" class="py-32 relative flex items-center justify-center">
+            <!-- Fondo de la sección -->
+            <div class="absolute inset-0 z-0">
+                <img src="https://images.unsplash.com/photo-1548055610-1845112f45cc?q=80&w=2000&auto=format&fit=crop" alt="Cacao" class="w-full h-full object-cover opacity-20 filter grayscale">
+                <div class="absolute inset-0 bg-black bg-opacity-70"></div>
+            </div>
+            
+            <div class="container mx-auto px-6 relative z-10 text-center">
+                <h2 class="text-4xl md:text-6xl font-cinzel text-white mb-8 reveal">¿Estás listo para el viaje?</h2>
+                <p class="text-gray-300 max-w-2xl mx-auto mb-10 text-lg reveal reveal-delay-1">Nuestras ediciones son limitadas, creadas para aquellos que buscan lo extraordinario. Contacta con nosotros para reservar tu experiencia Enigma.</p>
+                <a href="https://wa.me/1234567890" target="_blank" class="reveal reveal-delay-2 inline-flex items-center gap-3 bg-white text-black px-8 py-4 rounded-full font-bold tracking-widest text-sm hover:bg-[var(--color-gold)] transition-colors duration-300">
+                    <i class="fab fa-whatsapp text-xl"></i> SOLICITAR AHORA
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-black py-12 border-t border-gray-900">
+        <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-center md:text-left">
+                <h3 class="font-cinzel text-2xl text-white font-bold tracking-widest">ENIGMA <span class="text-[var(--color-gold)]">.</span></h3>
+                <p class="text-xs text-gray-500 mt-2">© 2026 Enigma Chocolates. La experiencia aguarda.</p>
+            </div>
+            
+            <div class="flex space-x-6">
+                <a href="#" class="text-gray-400 hover:text-[var(--color-gold)] transition-colors text-xl"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="text-gray-400 hover:text-[var(--color-gold)] transition-colors text-xl"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="text-gray-400 hover:text-[var(--color-gold)] transition-colors text-xl"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Reemplaza el número '1234567890' por tu número real con código de país -->
+    <a href="https://wa.me/1234567890?text=Hola,%20quiero%20vivir%20la%20experiencia%20Enigma" 
+       target="_blank" 
+       class="btn-whatsapp-floating fixed bottom-8 right-8 z-50 w-16 h-16 rounded-full flex items-center justify-center text-white text-3xl shadow-2xl cursor-pointer"
+       aria-label="Contactar por WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Animaciones de entrada al hacer scroll
+            const reveals = document.querySelectorAll(".reveal");
+
+            // Configuración del Intersection Observer
+            const observerOptions = {
+                root: null, // usa el viewport
+                rootMargin: '0px',
+                threshold: 0.15 // Se activa cuando el 15% del elemento es visible
+            };
+
+            const revealObserver = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("active");
+                        // Opcional: dejar de observar si solo queremos que se anime la primera vez
+                        // observer.unobserve(entry.target); 
+                    }
+                });
+            }, observerOptions);
+
+            reveals.forEach(reveal => {
+                revealObserver.observe(reveal);
+            });
+
+            // Efecto de cambio de fondo del Navbar al hacer scroll
+            const navbar = document.getElementById("navbar");
+            window.addEventListener("scroll", () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add("bg-black", "bg-opacity-90", "shadow-lg");
+                    navbar.classList.remove("bg-transparent");
+                } else {
+                    navbar.classList.remove("bg-black", "bg-opacity-90", "shadow-lg");
+                    navbar.classList.add("bg-transparent");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
